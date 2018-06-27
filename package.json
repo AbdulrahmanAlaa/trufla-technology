@@ -1,0 +1,24 @@
+{
+  "name": "code-challenge-1",
+  "version": "1.0.0",
+  "description": "task for Trufla Technology company ",
+  "main": "store.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbdulrahmanAlaa/trufla-technology.git"
+  },
+  "keywords": [
+    "trufla",
+    "store",
+    "dictionary"
+  ],
+  "author": "Abdulrahman Alaa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AbdulrahmanAlaa/trufla-technology/issues"
+  },
+  "homepage": "https://github.com/AbdulrahmanAlaa/trufla-technology#readme"
+}
