@@ -1,6 +1,10 @@
+const fs = require('fs');
+const dictionary = require('./dictionary');
+const consts = require('./defines');
 class Store {
-    constructor() {
+    constructor(_filePath) {
         this.args = [...process.argv];
+        this.filePath = _filePath || `./common/dictionary.store`;
     }
 
     /**
@@ -8,7 +12,9 @@ class Store {
      * @param {string} key Identifier
      * @param {String} value Value of related Key
      */
-    add(key, value) {
+    add(dictionary) {
+        fs.appendFileSync(this.filePath, `${dictionary.key}:${dictionary.value};`);
+        return consts.ADDED_SUCCESSFULLY(dictionary.key,dictionary.value);
     }
 
     /**
@@ -16,7 +22,7 @@ class Store {
      * @param {string} key Identifier
      */
     list() {
-
+        return fs.readFileSync(this.filePath, 'utf8').replace(/;/g, '\n').replace(/:/g, ' : ');
     }
 
     /**
@@ -24,7 +30,12 @@ class Store {
      * @param {string} key Identifier
      */
     get(key) {
-
+        const result = fs
+            .readFileSync(this.filePath, 'utf8')
+            .split(';')
+            .map(keyValue => new dictionary(keyValue.split(':')[0], keyValue.split(':')[1]))
+            .find(dic => dic.key.toLowerCase() === key.toLowerCase());
+        return result ? result.toString() : result;
     }
 
     /**
@@ -39,7 +50,8 @@ class Store {
      * Clear Stored list of dictionary values 
      */
     clear() {
-
+        fs.writeFileSync(this.filePath, '');
+        return consts.SUCCESSFULLY_CLEARED
     }
 }
-module.exports = Store;
+module.exports = new Store();
